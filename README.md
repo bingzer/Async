@@ -36,3 +36,10 @@ downloader.downloadAsync(new Task<String>(){
   }
 });
 ```
+
+# Gradle
+``` groovy
+dependencies {
+    compile 'com.bingzer.android.async:async:1.0.0'
+}
+```
