@@ -17,6 +17,8 @@ package com.bingzer.android.async.handlers;
 
 import com.bingzer.android.async.Task;
 
+import static com.bingzer.android.async.Async.runtimeException;
+
 /**
  * Ricky Tobing (2015)
  */
@@ -35,7 +37,7 @@ public abstract class VoidHandler implements Task.Handler<Void> {
             invokeOrThrow();
             return null;
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            throw runtimeException(e);
         }
     }
 
@@ -44,7 +46,7 @@ public abstract class VoidHandler implements Task.Handler<Void> {
         if(task instanceof Task.WithErrorReporting)
             ((Task.WithErrorReporting) task).onError(error);
         else
-            throw new RuntimeException(error);
+            throw runtimeException(error);
     }
 
     @Override

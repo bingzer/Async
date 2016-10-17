@@ -26,21 +26,16 @@ public abstract class ResultHandler extends TaskHandlerBase<Result> {
 
     @Override
     public final Result invoke() {
-        Result result = new Result();
         try {
             invokeOrThrow();
-            result.setSuccess(true);
+            return new Result();
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            return new Result(e);
         }
-        return result;
     }
 
     @Override
     public void onError(Throwable error) {
-        Result result = new Result();
-        result.setSuccess(false);
-        result.setError(error);
-        task.onCompleted(result);
+        task.onCompleted(new Result(error));
     }
 }

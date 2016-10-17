@@ -17,6 +17,8 @@ package com.bingzer.android.async.handlers;
 
 import com.bingzer.android.async.Task;
 
+import static com.bingzer.android.async.Async.runtimeException;
+
 public abstract class DelegateHandler<T> extends TaskHandlerBase<T> implements Task.WithErrorReporting<T> {
 
     public DelegateHandler(Task<T> task){
@@ -27,15 +29,15 @@ public abstract class DelegateHandler<T> extends TaskHandlerBase<T> implements T
         try {
             return invokeOrThrow();
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            throw runtimeException(e);
         }
     }
 
     @Override
     public void onError(Throwable error) {
-        if(task instanceof Task.WithErrorReporting) {
+        if(task instanceof Task.WithErrorReporting)
             ((Task.WithErrorReporting) task).onError(error);
-        }
-        else throw new RuntimeException(error);
+        else
+            throw runtimeException(error);
     }
 }

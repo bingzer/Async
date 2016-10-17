@@ -54,6 +54,17 @@ import java.util.concurrent.TimeUnit;
 public final class Async {
 
     /**
+     * Creates a RuntimeException from throwable e
+     * @param e the throwable
+     */
+    public static RuntimeException runtimeException(Throwable e){
+        if (!(e instanceof RuntimeException))
+            e = new RuntimeException(e);
+
+        return (RuntimeException) e;
+    }
+
+    /**
      * Do Async with Task.Handler
      */
     public static <T> void doAsync(final Task.Handler<T> handler){
